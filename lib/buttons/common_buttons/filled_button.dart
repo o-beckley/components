@@ -1,18 +1,15 @@
 import 'package:components/constants/constants.dart';
-import 'package:components/others/shadows.dart';
 import 'package:flutter/material.dart';
 
 class CustomFilledButton extends StatelessWidget {
   final String label;
   final IconData? iconData;
-  final bool elevated;
   final Accent accent;
   final VoidCallback? onTap;
 
   const CustomFilledButton({
     required this.label,
     this.iconData,
-    this.elevated = false,
     this.accent = Accent.primary,
     this.onTap,
     super.key});
@@ -40,9 +37,6 @@ class CustomFilledButton extends StatelessWidget {
               decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: elevated ? [
-                  customBoxShadow(Elevation.level1, context)
-                ] : null
               ),
               child: Padding(
                 padding: EdgeInsets.only(

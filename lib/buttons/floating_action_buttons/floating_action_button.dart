@@ -1,18 +1,19 @@
 import 'package:components/constants/constants.dart';
 import 'package:components/others/shadows.dart';
+import 'package:components/others/tonal_elevation.dart';
 import 'package:flutter/material.dart';
 
 class CustomFAB extends StatelessWidget {
   final IconData iconData;
   final Accent accent;
-  final FabSize size;
+  final Size size;
   final bool floating;
   final VoidCallback? onTap;
 
   const CustomFAB({
     required this.iconData,
-    this.accent = Accent.secondary,
-    this.size = FabSize.medium,
+    this.accent = Accent.primary,
+    this.size = Size.medium,
     this.floating = true,
     this.onTap,
     super.key});
@@ -20,16 +21,16 @@ class CustomFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double containerSize = switch(size){
-      FabSize.large => 96,
-      FabSize.medium => 56,
+      Size.large => 96,
+      Size.medium || Size.small => 56,
     };
     double iconSize = switch(size){
-      FabSize.large => 36,
-      FabSize.medium => 24,
+      Size.large => 36,
+      Size.medium || Size.small => 24,
     };
     double radius = switch(size){
-      FabSize.large => 28,
-      FabSize.medium => 16,
+      Size.large => 28,
+      Size.medium || Size.small=> 16,
     };
     Color backgroundColor = switch(accent){
       Accent.primary => Theme.of(context).colorScheme.surface,
@@ -48,7 +49,10 @@ class CustomFAB extends StatelessWidget {
         width: containerSize,
         child: Container(
           decoration: BoxDecoration(
-            color: backgroundColor,
+            color: tonalElevation(
+              backgroundColor,
+              floating ? Elevation.level0 : Elevation.level3
+            ),
             borderRadius: BorderRadius.circular(radius),
             boxShadow: floating ? [
               customBoxShadow(Elevation.level3, context)

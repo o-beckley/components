@@ -1,52 +1,39 @@
-import 'package:components/constants/constants.dart';
 import 'package:components/others/shadows.dart';
-import 'package:components/others/tonal_elevation.dart';
 import 'package:flutter/material.dart';
+import 'package:components/constants/constants.dart';
 
-class CustomExtendedFAB extends StatelessWidget {
+class CustomElevatedButton extends StatelessWidget {
   final String label;
   final IconData? iconData;
   final Accent accent;
-  final bool floating;
   final VoidCallback? onTap;
 
-  const CustomExtendedFAB({
+  const CustomElevatedButton({
     required this.label,
     this.iconData,
-    this.accent = Accent.secondary,
-    this.floating = true,
+    this.accent = Accent.primary,
     this.onTap,
     super.key});
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = switch(accent){
-      Accent.primary => Theme.of(context).colorScheme.surface,
-      Accent.secondary => Theme.of(context).colorScheme.secondaryContainer,
-      Accent.tertiary => Theme.of(context).colorScheme.tertiaryContainer,
-    };
     Color color = switch(accent){
       Accent.primary => Theme.of(context).colorScheme.primary,
-      Accent.secondary => Theme.of(context).colorScheme.onSecondaryContainer,
-      Accent.tertiary => Theme.of(context).colorScheme.onTertiaryContainer,
+      Accent.secondary => Theme.of(context).colorScheme.secondary,
+      Accent.tertiary => Theme.of(context).colorScheme.tertiary,
     };
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: 56,
+        height: 40,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               decoration: BoxDecoration(
-                color: tonalElevation(
-                  backgroundColor,
-                  floating ? Elevation.level0 : Elevation.level3
-                ),
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: floating ? [
-                  customBoxShadow(Elevation.level3, context)
-                ] : null
+                boxShadow: [customBoxShadow(Elevation.level1, context)]
               ),
               child: Padding(
                 padding: EdgeInsets.only(
